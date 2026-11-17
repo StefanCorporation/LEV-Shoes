@@ -1,0 +1,148 @@
+.collection {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  padding: 120px 10%;
+
+  background: #160e0e;
+  color: #f3e8d7;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  max-width: 650px;
+}
+
+.eyebrow {
+  color: #c7a36d;
+  font-size: 11px;
+  letter-spacing: 4px;
+}
+
+.content h2 {
+  margin: 30px 0;
+  font-family: serif;
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.content h2 em {
+  color: #c7a36d;
+  font-weight: 400;
+}
+
+.content p {
+  color: rgba(243, 232, 215, 0.65);
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+/* RIGHT SHOE PANEL */
+.shoePanel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.shoePanel::before {
+  content: '';
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  top: 50%;
+  right: 0;
+
+  transform: translateY(-50%);
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 190, 100, 0.22) 0%,
+    rgba(255, 170, 80, 0.1) 35%,
+    transparent 70%
+  );
+
+  filter: blur(35px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* SHOE IMAGE */
+.shoeImage {
+  position: absolute;
+  width: 55%;
+  aspect-ratio: 1 / 1;
+
+  top: 50%;
+  right: -5%;
+
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image: url('/images/section2/2Rbackground.jpg');
+  background-size: cover;
+  background-position: center;
+
+  transform: scale(1.3);
+  will-change: transform;
+  filter: none;
+}
+
+.backgroundImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+.lightRays {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  top: 50%;
+  right: -15%;
+  transform: translateY(-50%);
+  z-index: -1;
+  pointer-events: none;
+
+  background: repeating-conic-gradient(
+    from 205deg at 50% 50%,
+    transparent 0deg 8deg,
+    rgba(255, 220, 160, 0.18) 9deg 10deg,
+    transparent 12deg 20deg
+  );
+
+  filter: blur(12px);
+  opacity: 0.8;
+  animation: lightPlay 8s ease-in-out infinite alternate;
+}
+
+@keyframes lightPlay {
+  from {
+    transform: translateY(-50%) rotate(-5deg);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateY(-50%) rotate(5deg);
+    opacity: 0.9;
+  }
+}

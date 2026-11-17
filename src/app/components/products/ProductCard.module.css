@@ -1,0 +1,77 @@
+.card {
+  min-width: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #e9e1d7;
+}
+
+.featured .imageWrapper {
+  aspect-ratio: 1 / 1.1;
+}
+
+.productImage {
+  object-fit: contain;
+  padding: 12%;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.card:hover .productImage {
+  transform: scale(1.07);
+}
+
+.label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #806044;
+}
+
+.viewButton {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  padding: 15px;
+  border: none;
+  background: #241817;
+  color: #f3eee7;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+}
+
+.card:hover .viewButton {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.productInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 18px;
+}
+
+.productInfo h3 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.productInfo span {
+  font-size: 13px;
+  color: #806044;
+}

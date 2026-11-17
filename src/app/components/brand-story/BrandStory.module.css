@@ -1,0 +1,180 @@
+.brandStory {
+  --master-scale: 1;
+  --master-x: 0%;
+  --master-y: 0%;
+
+  --arm-scale: 1;
+  --arm-x: 0%;
+  --arm-y: 0%;
+}
+
+.brandStory {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 700px;
+  overflow: hidden;
+  background: #1c100c;
+  color: #f2e5d3;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Layer 1 — Workshop */
+
+.backgroundLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.backgroundLayer img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Layer 2 — Shoemaker */
+
+.shoemakerLayer {
+  position: absolute;
+  z-index: 2;
+  left: 36%;
+  bottom: 0;
+  width: 58%;
+  height: 92%;
+}
+
+.shoemakerLayer img {
+  object-fit: contain;
+  object-position: bottom center;
+
+  transform: translate(var(--master-x), var(--master-y))
+    scale(var(--master-scale));
+}
+
+/* Layer 3 — Arm and hammer */
+
+.armLayer {
+  position: absolute;
+  z-index: 3;
+
+  left: 55%;
+  bottom: -14%;
+  width: 30%;
+  height: 48%;
+
+  transform-origin: 0% 0%;
+}
+
+.armLayer img {
+  object-fit: contain;
+  object-position: left top;
+
+  transform: translate(-45%, -30%) scale(1.2);
+  transform-origin: 0% 0%;
+}
+
+/* Text */
+
+.content {
+  position: absolute;
+  z-index: 4;
+  top: 22%;
+  left: 9%;
+  max-width: 440px;
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 35px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #e5bd82;
+}
+
+.content h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: #fff4e5;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+}
+
+.content h2 em {
+  color: #e5bd82;
+  font-weight: 400;
+}
+
+.content p {
+  max-width: 360px;
+  color: #f0e2d2;
+  font-size: 14px;
+  line-height: 2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.signature {
+  display: block;
+  margin-top: 35px;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-style: italic;
+  color: #f0c88e;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .brandStory {
+    min-height: 750px;
+    height: 100svh;
+  }
+
+  .backgroundLayer img {
+    object-position: 55% center;
+  }
+
+  .shoemakerLayer {
+    left: 20%;
+    width: 85%;
+    height: 70%;
+  }
+
+  .armLayer {
+    left: 42%;
+    bottom: 16%;
+    width: 43%;
+    height: 35%;
+  }
+
+  .content {
+    top: 9%;
+    left: 7%;
+    max-width: 85%;
+  }
+
+  .content h2 {
+    font-size: 43px;
+  }
+
+  .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .divider {
+    margin: 20px 0;
+  }
+
+  .content p {
+    font-size: 12px;
+  }
+}
