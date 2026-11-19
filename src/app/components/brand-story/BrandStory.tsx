@@ -11,16 +11,17 @@ export default function BrandStory() {
   const backgroundRef = useRef<HTMLDivElement>(null)
   const shoemakerRef = useRef<HTMLDivElement>(null)
   const armRef = useRef<HTMLDivElement>(null)
+  const workGroupRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
     const section = sectionRef.current
     const background = backgroundRef.current
-    const shoemaker = shoemakerRef.current
+    const workGroup = workGroupRef.current
     const arm = armRef.current
 
-    if (!section || !background || !shoemaker || !arm) return
+    if (!section || !background || !workGroup || !arm) return
 
     const ctx = gsap.context(() => {
       const timeline = gsap.timeline({
@@ -48,10 +49,10 @@ export default function BrandStory() {
 
       // 2. Мастер постепенно приближается
       timeline.to(
-        shoemaker,
+        workGroup,
         {
-          yPercent: -5,
           scale: 1.08,
+          yPercent: -3,
           duration: 3,
           ease: 'none',
         },
@@ -90,7 +91,7 @@ export default function BrandStory() {
         {/* Layer 1 — Workshop background */}
         <div ref={backgroundRef} className={styles.backgroundLayer}>
           <Image
-            src="/images/brand/mastery/workshop2.jpeg"
+            src="/images/brand/mastery/workshopT.png"
             alt="Traditional shoemaking workshop"
             fill
             priority={false}
@@ -98,24 +99,59 @@ export default function BrandStory() {
           />
         </div>
 
-        {/* Layer 2 — Shoemaker */}
-        <div ref={shoemakerRef} className={styles.shoemakerLayer}>
-          <Image
-            src="/images/brand/mastery/shoemaker.png"
-            alt="Shoemaker working at his bench"
-            fill
-            sizes="100vw"
-          />
+        {/* Atmospheric effects — sunlight and dust */}
+        <div className={styles.atmosphereLayer}>
+          <div className={styles.lightBeam} />
+
+          <div className={styles.dustParticle}>
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
         </div>
 
-        {/* Layer 3 — Arm and hammer */}
-        <div ref={armRef} className={styles.armLayer}>
-          <Image
-            src="/images/brand/mastery/hend.png"
-            alt="Shoemaker's hand holding a hammer"
-            fill
-            sizes="100vw"
-          />
+        {/* Foreground camera group */}
+        <div ref={workGroupRef} className={styles.workGroup}>
+          {/* Layer 2 — Shoemaker */}
+          <div ref={shoemakerRef} className={styles.shoemakerLayer}>
+            <Image
+              src="/images/brand/mastery/shoemaker.png"
+              alt="Shoemaker working at his bench"
+              fill
+              sizes="100vw"
+            />
+          </div>
+
+          {/* Layer 3 — Workbench */}
+          <div className={styles.tableLayer}>
+            <Image
+              src="/images/brand/mastery/table5.png"
+              alt="Traditional shoemaker workbench with tools"
+              fill
+              sizes="100vw"
+            />
+          </div>
+
+          {/* Layer 4 — Arm pivot */}
+          <div className={styles.armPivot}>
+            <div ref={armRef} className={styles.armLayer}>
+              <Image
+                src="/images/brand/mastery/hend.png"
+                alt="Shoemaker's hand holding a hammer"
+                fill
+                sizes="100vw"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Text overlay */}
