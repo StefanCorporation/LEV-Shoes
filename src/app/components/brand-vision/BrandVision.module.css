@@ -1,0 +1,264 @@
+.brandVision {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 700px;
+  overflow: hidden;
+  background: #1c100c;
+  color: #f2e5d3;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.backgroundLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.backgroundLayer img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.atmosphereLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.lightBeam {
+  position: absolute;
+  top: -30%;
+  left: 25%;
+  width: 45%;
+  height: 160%;
+
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 214, 153, 0.02) 20%,
+    rgba(255, 210, 145, 0.18) 42%,
+    rgba(255, 226, 178, 0.32) 50%,
+    rgba(255, 210, 145, 0.16) 58%,
+    rgba(255, 214, 153, 0.02) 80%,
+    transparent 100%
+  );
+
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.dustParticle {
+  position: absolute;
+  inset: 0;
+}
+
+.dustParticle i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffe8bd;
+  box-shadow: 0 0 12px rgba(255, 210, 145, 0.8);
+  opacity: 0.5;
+}
+
+.workGroup {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transform-origin: center center;
+}
+
+.bossLayer {
+  position: absolute;
+  left: 17%;
+  bottom: -2%;
+  width: 58%;
+  height: 100%;
+  z-index: 2;
+}
+
+.modelerLayer {
+  position: absolute;
+  left: 27%;
+  bottom: -2%;
+  width: 57%;
+  height: 100%;
+  z-index: 2;
+}
+
+.tableLayer {
+  position: absolute;
+  left: 8%;
+  bottom: -36%;
+  width: 80%;
+  height: 102%;
+  z-index: 3;
+}
+
+.bossLayer img,
+.modelerLayer img,
+.tableLayer img {
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.content {
+  position: absolute;
+  z-index: 5;
+  top: 18%;
+  left: 8%;
+  max-width: 440px;
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 30px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #e5bd82;
+}
+
+.content h2 {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 400;
+  line-height: 1.08;
+  color: #fff4e5;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+}
+
+.content h2 em {
+  color: #e5bd82;
+  font-weight: 400;
+}
+
+.divider {
+  width: 70px;
+  height: 1px;
+  margin: 25px 0;
+  background: #c69b60;
+}
+
+.content p {
+  max-width: 360px;
+  font-size: 14px;
+  line-height: 2;
+  color: #f0e2d2;
+}
+
+.signature {
+  display: block;
+  margin-top: 30px;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-style: italic;
+  color: #f0c88e;
+}
+
+.contentRight {
+  top: 20%;
+  left: auto;
+  right: 6%;
+  max-width: 370px;
+  text-align: right;
+}
+
+.contentRight .divider {
+  margin-left: auto;
+}
+
+.contentRight p {
+  margin-left: auto;
+}
+
+.contentRight .eyebrow {
+  color: #e5bd82;
+}
+
+.transitionOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(198, 155, 96, 0.12) 0%,
+    rgba(28, 16, 12, 0.65) 55%,
+    #1c100c 100%
+  );
+
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .brandVision {
+    min-height: 680px;
+  }
+
+  .backgroundLayer img {
+    object-position: 58% center;
+  }
+
+  .bossLayer {
+    left: 0;
+    width: 55%;
+    height: 72%;
+  }
+
+  .modelerLayer {
+    left: 43%;
+    width: 58%;
+    height: 72%;
+  }
+
+  .tableLayer {
+    width: 115%;
+    left: -7%;
+    height: 43%;
+    bottom: -10%;
+  }
+
+  .content {
+    top: 7%;
+    left: 7%;
+    right: 7%;
+    max-width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    margin-bottom: 18px;
+  }
+
+  .content h2 {
+    font-size: clamp(36px, 9vw, 50px);
+  }
+
+  .content p {
+    max-width: 280px;
+    font-size: 12px;
+  }
+
+  .contentRight {
+    display: none;
+  }
+
+  .signature {
+    font-size: 18px;
+  }
+}

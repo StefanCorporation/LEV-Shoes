@@ -12,6 +12,9 @@ export default function BrandStory() {
   const shoemakerRef = useRef<HTMLDivElement>(null)
   const armRef = useRef<HTMLDivElement>(null)
   const workGroupRef = useRef<HTMLDivElement>(null)
+  const tableRef = useRef<HTMLDivElement>(null)
+  const atmosphereRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -34,6 +37,22 @@ export default function BrandStory() {
           anticipatePin: 1,
         },
       })
+      gsap.set(contentRef.current, {
+        autoAlpha: 0,
+        y: 60,
+        filter: 'blur(10px)',
+      })
+      timeline.to(
+        contentRef.current,
+        {
+          autoAlpha: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.5,
+          ease: 'power2.out',
+        },
+        0.5,
+      )
 
       // 1. Камера приближается к мастерской
       timeline.to(
@@ -82,7 +101,9 @@ export default function BrandStory() {
         })
     }, section)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+    }
   }, [])
 
   return (
@@ -100,7 +121,7 @@ export default function BrandStory() {
         </div>
 
         {/* Atmospheric effects — sunlight and dust */}
-        <div className={styles.atmosphereLayer}>
+        <div ref={atmosphereRef} className={styles.atmosphereLayer}>
           <div className={styles.lightBeam} />
 
           <div className={styles.dustParticle}>
@@ -132,7 +153,7 @@ export default function BrandStory() {
           </div>
 
           {/* Layer 3 — Workbench */}
-          <div className={styles.tableLayer}>
+          <div ref={tableRef} className={styles.tableLayer}>
             <Image
               src="/images/brand/mastery/table5.png"
               alt="Traditional shoemaker workbench with tools"
@@ -155,7 +176,7 @@ export default function BrandStory() {
         </div>
 
         {/* Text overlay */}
-        <div className={styles.content}>
+        <div ref={contentRef} className={styles.content}>
           <span className={styles.eyebrow}>01 / THE ART OF CRAFTSMANSHIP</span>
 
           <h2>
