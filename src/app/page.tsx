@@ -4,6 +4,7 @@ import FeaturedCollection from './components/featuredCollection/FeaturedCollecti
 import Preloader from './components/preloader/Preloader'
 import BrandStory from './components/brand-story/BrandStory'
 import BrandVision from './components/brand-vision/BrandVision'
+import BrandCutting from './components/brand-cutting/BrandCutting'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturedCollection />
       <BrandStory />
       <BrandVision />
+      <BrandCutting />
     </main>
   )
 }
