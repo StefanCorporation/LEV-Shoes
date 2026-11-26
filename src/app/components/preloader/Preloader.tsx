@@ -8,8 +8,8 @@ export default function Preloader() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.dispatchEvent(new Event('loadingComplete'))
       setVisible(false)
+      window.dispatchEvent(new Event('loadingComplete'))
     }, 3000)
 
     return () => clearTimeout(timer)

@@ -12,27 +12,34 @@ import {
 } from 'lucide-react'
 
 import styles from './Hero.module.css'
-import Shoe3D from './Shoe3D'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const products = [
   {
-    image: '/images/products/heel-01.webp',
-    alt: 'LEV burgundy heel, three-quarter view',
+    image: '/images/hero/45left1.png',
+    alt: 'LEV shoe, 45-degree left view',
   },
   {
-    image: '/images/products/heel-02.webp',
-    alt: 'LEV burgundy heel, rear view',
+    image: '/images/hero/right1.png',
+    alt: 'LEV shoe, right side view',
   },
   {
-    image: '/images/products/heel-03.webp',
-    alt: 'LEV burgundy heel, top view',
+    image: '/images/hero/back1.png',
+    alt: 'LEV shoe, rear view',
   },
   {
-    image: '/images/products/heel-detail.webp',
-    alt: 'LEV gold lion ornament and leather detail',
+    image: '/images/hero/left1.png',
+    alt: 'LEV shoe, left side view',
+  },
+  {
+    image: '/images/hero/top1.png',
+    alt: 'LEV shoe, top view',
+  },
+  {
+    image: '/images/hero/down1.png',
+    alt: 'LEV shoe, bottom view',
   },
 ]
 
@@ -41,18 +48,98 @@ export default function Hero() {
 
   // Индекс выбранного изображения: 0, 1, 2 или 3.
   const [activeProduct, setActiveProduct] = useState(0)
+  const imageRef = useRef<HTMLImageElement>(null)
 
-  // Получаем следующий ракурс.
+  const transitionTimeline = useRef<gsap.core.Timeline | null>(null)
+
+  const changeProduct = (index: number) => {
+    if (index === activeProduct) return
+
+    transitionTimeline.current?.kill()
+
+    const image = heroRef.current?.querySelector(`.${styles.productImage}`)
+    const glow = heroRef.current?.querySelector(`.${styles.revealGlow}`)
+    const flash = heroRef.current?.querySelector(`.${styles.revealFlash}`)
+
+    if (!image || !glow || !flash) {
+      setActiveProduct(index)
+      return
+    }
+
+    transitionTimeline.current = gsap.timeline()
+
+    transitionTimeline.current
+      .to(image, {
+        opacity: 0,
+        scale: 0.72,
+        filter: 'blur(12px)',
+        duration: 0.4,
+        ease: 'power2.in',
+      })
+      .to(
+        glow,
+        {
+          opacity: 1,
+          scale: 1.5,
+          duration: 0.35,
+        },
+        '<',
+      )
+      .to(
+        flash,
+        {
+          opacity: 0.95,
+          duration: 0.15,
+        },
+        '<0.1',
+      )
+      .call(() => {
+        setActiveProduct(index)
+      })
+      .to(flash, {
+        opacity: 0,
+        duration: 0.5,
+      })
+      .to(
+        glow,
+        {
+          opacity: 0,
+          scale: 0.7,
+          duration: 0.7,
+        },
+        '<',
+      )
+  }
+
   const nextProduct = () => {
-    setActiveProduct((current) => (current + 1) % products.length)
+    changeProduct((activeProduct + 1) % products.length)
   }
 
-  // Получаем предыдущий ракурс.
   const previousProduct = () => {
-    setActiveProduct(
-      (current) => (current - 1 + products.length) % products.length,
-    )
+    changeProduct((activeProduct - 1 + products.length) % products.length)
   }
+
+  useLayoutEffect(() => {
+    const image = imageRef.current
+
+    if (!image) return
+
+    gsap.fromTo(
+      image,
+      {
+        opacity: 0,
+        scale: 0.78,
+        filter: 'blur(10px)',
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 0.8,
+        ease: 'power3.out',
+      },
+    )
+  }, [activeProduct])
 
   useLayoutEffect(() => {
     const hero = heroRef.current
@@ -258,8 +345,20 @@ export default function Hero() {
             <span className={styles.orbitPoint} />
           </div>
 
-          <div className={styles.product}>
-            <Shoe3D />
+          <div className={`${styles.productDisplay}`}>
+            <Image
+              ref={imageRef}
+              key={products[activeProduct].image}
+              src={products[activeProduct].image}
+              alt={products[activeProduct].alt}
+              fill
+              priority
+              sizes="(max-width: 760px) 85vw, 50vw"
+              className={styles.productImage}
+            />
+
+            <div className={styles.revealGlow} />
+            <div className={styles.revealFlash} />
           </div>
 
           <div className={styles.rotationLabel}>
@@ -278,7 +377,7 @@ export default function Hero() {
                   ? styles.thumbnailActive
                   : styles.thumbnail
               }
-              onClick={() => setActiveProduct(index)}
+              onClick={() => changeProduct(index)}
               aria-label={`Show shoe view ${index + 1}`}
               aria-pressed={activeProduct === index}
             >
